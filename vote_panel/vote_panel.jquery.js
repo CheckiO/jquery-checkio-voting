@@ -60,13 +60,13 @@
         }else{
             $vote_panel.find('.voting_score').removeClass('positive').addClass('negative')
         }
+        highlight_user_vote($vote_panel, user_score, 'voted')
     }
 
     function show_default_score_vote($vote_panel){
         var user_score = parseInt($vote_panel.attr('rel_user_vote'));
         var total_score = parseInt($vote_panel.find('.voting_score').text()) || 0
 
-        highlight_user_vote($vote_panel, user_score, 'voted')
         set_current_score($vote_panel, total_score, user_score)
     }
 
@@ -81,7 +81,6 @@
                 if(!data.success){
                     return alert(data.error_message);
                 }
-                highlight_user_vote($vote_panel, count, 'voted')
                 set_current_score($vote_panel, data.score.score, count)
             },
             'error': function (request, status) {
@@ -114,7 +113,7 @@
             if(options.possible_max_vote != undefined && vote > options.possible_max_vote){
                 return 'disabled'
             }
-        }else if(vote < 0){
+        }else{
             if(options.possible_min_vote != undefined && vote < options.possible_min_vote){
                 return 'disabled'
             }
@@ -153,7 +152,6 @@
                 if(options.ajax_process_error(data, $vote_panel, options, vote)){
                     return
                 }
-                highlight_user_vote($vote_panel, vote, 'voted')
                 set_current_score($vote_panel, options.ajax_process_result_score(data, $vote_panel, options, vote), vote)
 
                 if(options.ajax_process_finish){
@@ -191,7 +189,21 @@
         DEFAULTS = $.extend(DEFAULTS, options)
     }
 
+    var ACTIONS = {
+        'set_score':function($vote_panel, options){
+            $vote_panel.each(function(){
+                var $el = $(this);
+                set_current_score($el, options.total_score, options.user_score)
+            })
+        }
+    }
+
     $.fn.vote_panel = function(options){
+        if(options.action){
+            ACTIONS[options.action](this, options)
+            return this
+        }
+
         options = $.extend({},DEFAULTS,options);
 
 
