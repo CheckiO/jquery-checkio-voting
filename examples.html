@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jquery CheckiO Voting Examples</title>
+
+    <link rel="stylesheet" href="vote_panel/vote_panel.css">
+    <script src="jquery-1.8.3.js"></script>
+    <script src="vote_panel/vote_panel.jquery.js"></script>
+    <script type="text/javascript">
+        // You can make a global setup of default parameters
+        $.vote_panel({
+            'max_output_vote':5,
+            'min_output_vote':-5
+        })
+    </script>
+    <style>
+        .row{
+            float: left;
+            width: 100%;
+        }
+        .row .description{
+            float: left;
+            font-size: 20px;
+        }
+        .row .example{
+            margin-left: 100px;
+            margin-top: 10px;
+        }
+        .row .example .space{
+            float: left;
+            height: 30px;
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="row r1">
+    <div class="description">Simple using in CheckiO</div>
+
+    <script type="text/javascript">
+        $(function(){
+            $('.r1 .vote_panel').vote_panel({
+                'possible_max_vote':3,
+                'possible_min_vote':-3,
+                'dj_app':'catalog',
+                'dj_model':'publishedimplementation',
+                'href_generator_': function($vote_panel, options, vote){
+                    var url = '/vote/direct/'+options.dj_app+'/'+options.dj_model+'/'+$vote_panel.attr('rel')+'/'
+                    if(vote > 0){
+                        url += 'up/'+Math.abs(vote)+'/'
+                    }else if(vote < 0){
+                        url += 'down/'+Math.abs(vote)+'/'
+                    }else{
+                        url += 'clear/'
+                    }
+                    return url
+                },
+                'ajax_url_generator': function($vote_panel, options, vote){
+                    var url = '/vote/'+options.dj_app+'/'+options.dj_model+'/'+$vote_panel.attr('rel')+'/'
+                    if(vote > 0){
+                        url += 'up/'+Math.abs(vote)+'/'
+                    }else if(vote < 0){
+                        url += 'down/'+Math.abs(vote)+'/'
+                    }else{
+                        url += 'clear/'
+                    }
+                    return url
+                },
+                'ajax_process_result_score':function(data, $vote_panel, options, vote){
+                    return data.score.score
+                }
+            })
+        })
+    </script>
+
+    <div style="clear: both"></div>
+    <div class="example">
+        <div class="vote_panel small" rel="13" rel_user_vote="2">
+            <div class="voting_result">
+                <span class="voting_score">10</span>
+                <span class="voting_score_highlighted"></span>
+            </div>
+        </div>
+
+        <div class="space"></div>
+
+        <div class="vote_panel small" rel="14" rel_user_vote="-1">
+            <div class="voting_result">
+                <span class="voting_score">7</span>
+                <span class="voting_score_highlighted"></span>
+            </div>
+        </div>
+
+        <div class="space"></div>
+
+        <div class="vote_panel small" rel="15" rel_user_vote="-1">
+            <div class="voting_result">
+                <span class="voting_score">-1</span>
+                <span class="voting_score_highlighted"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="clear: both"></div>
+
+
+<div class="row r3">
+    <script type="text/javascript">
+        $(function(){
+            $('.r3 .vote_panel').vote_panel()
+        })
+    </script>
+    <div class="description">Using only one div</div>
+    <div style="clear: both"></div>
+    <div class="example">
+        <div class="vote_panel small" rel="13" rel_user_vote="2" rel_total_score="10"></div>
+
+        <div class="space"></div>
+
+        <div class="vote_panel small" rel="14" rel_user_vote="-1" rel_total_score="7"></div>
+
+        <div class="space"></div>
+
+        <div class="vote_panel small" rel="15" rel_user_vote="-1" rel_total_score="-1"></div>
+    </div>
+</div>
+
+<div style="clear: both"></div>
+
+
+
+
+<div class="row r4">
+    <script type="text/javascript">
+        $(function(){
+            $('.r4 .vote_panel').vote_panel({
+                'max_output_vote':1,
+                'min_output_vote':-1
+            })
+        })
+    </script>
+    <div class="description">Simplest output</div>
+    <div style="clear: both"></div>
+    <div class="example">
+        <div class="vote_panel small" rel="13" rel_user_vote="0" rel_total_score="10"></div>
+
+        <div class="space"></div>
+
+        <div class="vote_panel small" rel="14" rel_user_vote="-1" rel_total_score="7"></div>
+
+        <div class="space"></div>
+
+        <div class="vote_panel small" rel="15" rel_user_vote="1" rel_total_score="-1"></div>
+    </div>
+</div>
+
+<div style="clear: both"></div>
+
+</body>
+</html>

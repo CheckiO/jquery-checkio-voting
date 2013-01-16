@@ -1,0 +1,108 @@
+.vote_panel  .vote_direction_panel{
+    float: left;
+}
+
+.vote_panel  .voting_result{
+    float: left;
+    margin-right: 4px;
+    width: 30px;
+    text-align: center;
+    cursor: pointer;
+    height: 17px;
+}
+
+.vote_panel.small  .voting_result{
+    width: 20px;
+}
+
+.vote_panel.normal  .voting_result{
+    width: 40px;
+    font-size: 20px;
+}
+
+.vote_panel  .vote_direction_panel  .bn_vote {
+    float: left;
+    padding-left: 0px;
+    margin-top: -2px;
+}
+
+.vote_panel.small  .vote_direction_panel  .bn_vote {
+    width: 16px;
+    height: 16px;
+    margin-left: -4px;
+}
+
+.vote_panel.normal  .vote_direction_panel  .bn_vote {
+    width: 32px;
+    height: 32px;
+    margin-left: -12px;
+}
+
+.vote_panel.small .vote_direction_panel.up  .bn_vote{
+    background: url('img/like_states_16.png') no-repeat 0 -14px;
+}
+
+.vote_panel.small .vote_direction_panel.down  .bn_vote{
+    background: url('img/dislike_states_16.png') no-repeat 0 -14px;
+}
+
+.vote_panel.normal .vote_direction_panel.up  .bn_vote{
+    background: url('img/like_states_32.png') no-repeat 0 -32px;
+}
+
+.vote_panel.normal .vote_direction_panel.down  .bn_vote{
+    background: url('img/dislike_states_32.png') no-repeat 0 -32px;
+}
+
+.vote_panel.active.small .vote_direction_panel  .bn_vote.voted{
+    background-position: 0 -14px;
+}
+
+.vote_panel.active.normal .vote_direction_panel  .bn_vote.voted{
+    background-position: 0 -32px;
+}
+
+.vote_panel.small .vote_direction_panel  .bn_vote.voted,
+.vote_panel.active.small .vote_direction_panel  .bn_vote.highlight{
+
+    background-position: 0 2px;
+}
+
+.vote_panel.normal .vote_direction_panel  .bn_vote.voted,
+.vote_panel.active.normal .vote_direction_panel  .bn_vote.highlight{
+
+    background-position: 0 0px;
+}
+
+.vote_panel.small .vote_direction_panel  .bn_vote.disabled, .vote_panel.loading.small .vote_direction_panel  .bn_vote{
+    background-position: 0 -63px;
+}
+
+.vote_panel.normal .vote_direction_panel  .bn_vote.disabled, .vote_panel.loading.normal .vote_direction_panel  .bn_vote{
+    background-position: 0 -127px;
+}
+
+.vote_panel .voting_score, .vote_panel .voting_score_highlighted{
+    font-weight: bold;
+}
+
+.vote_panel .voting_score.positive, .vote_panel.active .voting_score_highlighted.positive{
+    color: #294371;
+}
+
+.vote_panel .voting_score.negative, .vote_panel.active .voting_score_highlighted.negative{
+    color: #737371;
+}
+
+.vote_panel .voting_score_highlighted{
+    display: none;
+}
+
+.vote_panel.active .voting_score_highlighted{
+    display: inline;
+}
+
+.vote_panel.active .voting_score{
+    display: none;
+}
+
